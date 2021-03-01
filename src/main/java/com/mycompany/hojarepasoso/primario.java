@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class primario extends javax.swing.JFrame {
 
-    Hilo x = new Hilo(1);
+    HiloNumero x = new HiloNumero(1);
     HiloABC y = new HiloABC(2);
 
     public primario() {
@@ -65,6 +65,12 @@ public class primario extends javax.swing.JFrame {
             }
         });
 
+        textoabc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoabcActionPerformed(evt);
+            }
+        });
+
         ABC.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         ABC.setText("a");
 
@@ -78,12 +84,12 @@ public class primario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(iniciarboton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                         .addComponent(inicioABC)
                         .addGap(47, 47, 47))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cajatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                        .addComponent(cajatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(textoabc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -128,136 +134,35 @@ public class primario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cajatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajatxtActionPerformed
-        // TODO add your handling code here:
+        cajatxt.setText("");
     }//GEN-LAST:event_cajatxtActionPerformed
 
     private void iniciarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarbotonActionPerformed
-
         if (x.isAlive() == false) {
             String j = cajatxt.getText();
-            int n = Integer.parseInt(j);
-            x = new Hilo(n);
-            x.start();
+            int n = Integer.parseInt(j); //pasa el numero obtenido (string) a int. 
+            x = new HiloNumero(n); //se le envia al hilo para que avance de numero 
+            x.start(); //se inicia el Hilo
         }
-
-
     }//GEN-LAST:event_iniciarbotonActionPerformed
 
     private void inicioABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioABCActionPerformed
-
         if (y.isAlive() == false) {
             String j = textoabc.getText();
-            switch (j) {
-                case "a":
-                    y = new HiloABC(1);
-                    break;
-                case "b":
-                    y = new HiloABC(2);
-                    break;
-                case "c":
-                    y = new HiloABC(3);
-
-                    break;
-                case "d":
-                    y = new HiloABC(4);
-
-                    break;
-                case "e":
-                    y = new HiloABC(5);
-
-                    break;
-                case "f":
-                    y = new HiloABC(6);
-
-                    break;
-                case "g":
-                    y = new HiloABC(7);
-
-                    break;
-                case "h":
-                    y = new HiloABC(8);
-
-                    break;
-                case "i":
-                    y = new HiloABC(9);
-
-                    break;
-                case "j":
-                    y = new HiloABC(10);
-
-                    break;
-                case "k":
-                    y = new HiloABC(11);
-
-                    break;
-                case "l":
-                    y = new HiloABC(12);
-
-                    break;
-                case "m":
-                    y = new HiloABC(13);
-
-                    break;
-                case "n":
-                    y = new HiloABC(14);
-
-                    break;
-                case "o":
-                    y = new HiloABC(15);
-
-                    break;
-                case "p":
-                    y = new HiloABC(16);
-
-                    break;
-                case "q":
-                    y = new HiloABC(17);
-
-                    break;
-                case "r":
-                    y = new HiloABC(18);
-
-                    break;
-                case "s":
-
-                    y = new HiloABC(19);
-                    break;
-                case "t":
-                    y = new HiloABC(20);
-
-                    break;
-                case "u":
-                    y = new HiloABC(21);
-
-                    break;
-                case "v":
-                    y = new HiloABC(22);
-
-                    break;
-                case "w":
-                    y = new HiloABC(23);
-
-                    break;
-                case "x":
-                    y = new HiloABC(24);
-
-                    break;
-                case "y":
-                    y = new HiloABC(25);
-
-                    break;
-                case "z":
-                    y = new HiloABC(26);
-
-                    break;
-
+            char letra = j.charAt(0);
+            int ascii = (int) letra;
+            if (ascii >= 97 && ascii <= 122) {
+                y = new HiloABC(ascii);
             }
             y.start();
-
         }
 
 
     }//GEN-LAST:event_inicioABCActionPerformed
+
+    private void textoabcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoabcActionPerformed
+        textoabc.setText("");
+    }//GEN-LAST:event_textoabcActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,134 +200,42 @@ public class primario extends javax.swing.JFrame {
         });
     }
 
-    public class Hilo extends Thread {
+    public class HiloNumero extends Thread {
 
-        int cont = 0;
-
-        public Hilo(int aux) {
-            this.cont = aux;
+        int cont = 0; //contador que aumentara para llegar a 100. 
+        public HiloNumero(int num) {
+            this.cont = num;
         }
-
         @Override
         public void run() {
-            while (cont <= 100) {
-                text.setText(String.valueOf(cont));
-                cont++;
+            while (cont <= 100)  { // finaliza el ciclo  cuando llegue a 100
+                text.setText(String.valueOf(cont)); // se envia el valor del numero. 
+                cont++; //se aumenta de numero hasta llegar a 100
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(primario.class.getName()).log(Level.SEVERE, null, ex);
-
                 }
             }
         }
     }
 
     public class HiloABC extends Thread {
-
         int cont = 0;
-
-        public HiloABC(int aux) {
-            this.cont = aux;
+        public HiloABC(int ascii) {
+            this.cont = ascii;
         }
-        public String letra(int a){
-           a=cont;
-           String aux="";
-            switch(a){
-                case 1:
-                   aux="a";
-                    break;
-               case 2:
-                   aux="b";
-                    break;
-               case 3:
-                   aux="c";
-                    break;
-               case 4:
-                   aux="d";
-                    break;
-               case 5:
-                   aux="e";
-                    break;
-               case 6:
-                   aux="f";
-                    break;
-               case 7:
-                   aux="g";
-                    break;
-               case 8:
-                   aux="h";
-                    break;
-               case 9:
-                   aux="i";
-                    break;
-               case 10:
-                   aux="j";
-                    break;
-               case 11:
-                   aux="k";
-                    break;
-               case 12:
-                   aux="l";
-                    break;
-               case 13:
-                   aux="m";
-                    break;
-               case 14:
-                   aux="n";
-                    break;
-               case 15:
-                   aux="o";
-                    break;
-               case 16:
-                   aux="p";
-                    break;
-               case 17:
-                   aux="q";
-                    break;
-               case 18:
-                   aux="r";
-                    break;
-               case 19:
-                   aux="s";
-                    break;
-               case 20:
-                   aux="t";
-                    break;
-               case 21:
-                   aux="u";
-                    break;
-               case 22:
-                   aux="v";
-                    break;
-               case 23:
-                   aux="w";
-                    break;
-               case 24:
-                   aux="x";
-                    break;
-               case 25:
-                   aux="y";
-                    break;
-               case 26:
-                   aux="z";
-                    break;
-               
-          }
-         return aux;  
-        }
-        
         @Override
         public void run() {
-            while (cont <= 26) {
-                ABC.setText(letra(cont));
-                
-                cont++;
+            char letra;
+            while (cont <= 122)  { //FINALIZA EL CICLO CUANDO LLEGA A 122 QUE ES EL ASCII DE "z" 
+                letra = (char) cont; //CONVIERTE EL ASCII A CHAR
+                ABC.setText(Character.toString(letra));  //ENVIA la letra al label conviertiendo el char a string. 
+                cont++; //aumenta el ascii, hasta llegar a 122. 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(primario.class.getName()).log(Level.SEVERE, null, ex);
-
                 }
             }
         }
