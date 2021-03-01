@@ -7,6 +7,7 @@ package com.mycompany.hojarepasoso;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,8 +40,12 @@ public class primario extends javax.swing.JFrame {
         inicioABC = new javax.swing.JButton();
         textoabc = new javax.swing.JTextField();
         ABC = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
 
         iniciarboton.setText("Inciar");
         iniciarboton.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +79,10 @@ public class primario extends javax.swing.JFrame {
         ABC.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         ABC.setText("a");
 
+        jLabel1.setText("Ingrese Numero");
+
+        jLabel2.setText("Ingrese Letra");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,14 +91,8 @@ public class primario extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(iniciarboton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                        .addComponent(inicioABC)
-                        .addGap(47, 47, 47))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cajatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(textoabc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -97,7 +100,18 @@ public class primario extends javax.swing.JFrame {
                         .addComponent(text)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ABC)
-                        .addGap(66, 66, 66))))
+                        .addGap(66, 66, 66))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(41, 41, 41))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(iniciarboton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inicioABC)
+                        .addGap(38, 38, 38))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,6 +120,10 @@ public class primario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(text, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ABC, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cajatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,7 +145,7 @@ public class primario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,9 +158,15 @@ public class primario extends javax.swing.JFrame {
     private void iniciarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarbotonActionPerformed
         if (x.isAlive() == false) {
             String j = cajatxt.getText();
-            int n = Integer.parseInt(j); //pasa el numero obtenido (string) a int. 
-            x = new HiloNumero(n); //se le envia al hilo para que avance de numero 
-            x.start(); //se inicia el Hilo
+            int n = Integer.parseInt(j); //pasa el numero obtenido (string) a int.
+            if (n >= 0 && n <= 100) { //verifica que el numero no este fuera de los rangos
+                x = new HiloNumero(n); //se le envia al hilo para que avance de numero 
+                x.start(); //se inicia el Hilo
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "NUMERO FUERA DE RANGO, ingrese Numeros entre 0-100");
+            }
         }
     }//GEN-LAST:event_iniciarbotonActionPerformed
 
@@ -151,10 +175,15 @@ public class primario extends javax.swing.JFrame {
             String j = textoabc.getText();
             char letra = j.charAt(0);
             int ascii = (int) letra;
-            if (ascii >= 97 && ascii <= 122) {
+            if (ascii >= 97 && ascii <= 122) { //verifica que el caracter ingresado este entre 97 ("a") y 122 ("z")
                 y = new HiloABC(ascii);
+                y.start();
             }
-            y.start();
+            else
+            {
+                JOptionPane.showMessageDialog(null, "LETRA FUERA DE RANGO, ingrese una letra entre a-z");
+            }
+            
         }
 
 
@@ -203,16 +232,18 @@ public class primario extends javax.swing.JFrame {
     public class HiloNumero extends Thread {
 
         int cont = 0; //contador que aumentara para llegar a 100. 
+
         public HiloNumero(int num) {
             this.cont = num;
         }
+
         @Override
         public void run() {
-            while (cont <= 100)  { // finaliza el ciclo  cuando llegue a 100
+            while (cont <= 100) { // finaliza el ciclo  cuando llegue a 100
                 text.setText(String.valueOf(cont)); // se envia el valor del numero. 
                 cont++; //se aumenta de numero hasta llegar a 100
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(primario.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -221,19 +252,22 @@ public class primario extends javax.swing.JFrame {
     }
 
     public class HiloABC extends Thread {
+
         int cont = 0;
+
         public HiloABC(int ascii) {
             this.cont = ascii;
         }
+
         @Override
         public void run() {
             char letra;
-            while (cont <= 122)  { //FINALIZA EL CICLO CUANDO LLEGA A 122 QUE ES EL ASCII DE "z" 
+            while (cont <= 122) { //FINALIZA EL CICLO CUANDO LLEGA A 122 QUE ES EL ASCII DE "z" 
                 letra = (char) cont; //CONVIERTE EL ASCII A CHAR
                 ABC.setText(Character.toString(letra));  //ENVIA la letra al label conviertiendo el char a string. 
                 cont++; //aumenta el ascii, hasta llegar a 122. 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(primario.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -247,6 +281,8 @@ public class primario extends javax.swing.JFrame {
     private javax.swing.JTextField cajatxt;
     private javax.swing.JButton iniciarboton;
     private javax.swing.JButton inicioABC;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel text;
     private javax.swing.JTextField textoabc;
