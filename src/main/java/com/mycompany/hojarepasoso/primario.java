@@ -325,14 +325,97 @@ public class primario extends javax.swing.JFrame {
         public HiloABC(int aux) {
             this.cont = aux;
         }
-        public String letra(){
-          return "";  
+        public String letra(int a){
+           a=cont;
+           String aux="";
+            switch(a){
+                case 1:
+                   aux="a";
+                    break;
+               case 2:
+                   aux="b";
+                    break;
+               case 3:
+                   aux="c";
+                    break;
+               case 4:
+                   aux="d";
+                    break;
+               case 5:
+                   aux="e";
+                    break;
+               case 6:
+                   aux="f";
+                    break;
+               case 7:
+                   aux="g";
+                    break;
+               case 8:
+                   aux="h";
+                    break;
+               case 9:
+                   aux="i";
+                    break;
+               case 10:
+                   aux="j";
+                    break;
+               case 11:
+                   aux="k";
+                    break;
+               case 12:
+                   aux="l";
+                    break;
+               case 13:
+                   aux="m";
+                    break;
+               case 14:
+                   aux="n";
+                    break;
+               case 15:
+                   aux="o";
+                    break;
+               case 16:
+                   aux="p";
+                    break;
+               case 17:
+                   aux="q";
+                    break;
+               case 18:
+                   aux="r";
+                    break;
+               case 19:
+                   aux="s";
+                    break;
+               case 20:
+                   aux="t";
+                    break;
+               case 21:
+                   aux="u";
+                    break;
+               case 22:
+                   aux="v";
+                    break;
+               case 23:
+                   aux="w";
+                    break;
+               case 24:
+                   aux="x";
+                    break;
+               case 25:
+                   aux="y";
+                    break;
+               case 26:
+                   aux="z";
+                    break;
+               
+          }
+         return aux;  
         }
         
         @Override
         public void run() {
             while (cont <= 26) {
-                ABC.setText(String.valueOf(cont));
+                ABC.setText(letra(cont));
                 
                 cont++;
                 try {
